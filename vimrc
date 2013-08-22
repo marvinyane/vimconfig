@@ -17,20 +17,15 @@ set expandtab
 set shiftwidth=4
 
 set tags=tags;
+
 set autochdir
 
 ""au GUIEnter * simalt ~x
 set guioptions-=T
 set cursorline
 set ic smartcase
-"" for python
-let OPTION_NAME = 1
-let b:python_version_2 = 1
-let g:python_highlight_all=1
-let g:pydoc_cmd='/usr/bin/python2.7'
-let g:pydiction_location='~/.vim/tools/pydiction/complete-dict'
 
-set listchars+=tab:>\ 
+""set listchars+=tab:>\ 
 set nobackup
 set backupext=.bak
 set scrolloff=3
@@ -43,50 +38,8 @@ set backspace=indent,eol,start
 set hlsearch
 
 filetype plugin indent on
-au BufNewFile,BufRead *.py,*.pyw setf python
 
 
-"ctags complete
-""""""""""""""""""""""""""""""""""""""""""""""
-""omni completion
-""""""""""""""""""""""""""""""""""""""""""""""
-set nocp
-set completeopt=longest,menu
-imap <silent> ` <C-X><C-O>
-
-
-inoremap <C-]>             <C-X><C-]>
-inoremap <C-F>             <C-X><C-F>
-inoremap <C-D>             <C-X><C-D>
-inoremap <C-L>             <C-X><C-L>
-
-let g:AutoComplPop_MappingDriven = 1
-let g:pumselect = 0
-inoremap <expr> <TAB>   MaySelect()
-function MaySelect()
-    if(pumvisible())
-        let g:pumselect = 1
-        return "\<DOWN>"
-    endif
-    return "\<TAB>"
-endfunc
-
-inoremap <expr> <Space> MayComplete()
-func MayComplete()
-    if (pumvisible() && g:pumselect)
-        let g:pumselect = 0
-        return "\<CR>"
-    endif
-    return "\<Space>"
-endfunc
-
-inoremap <expr> <CR> StateChangeEnter()
-func StateChangeEnter()
-    let g:pumselect = 0
-    return "\<CR>"
-endfunc""))""""))))""""))))
-
-let g:SimpleJsIndenter_BriefMode = 1
 
 let Tlist_Show_One_File=1
 let Tlist_Exit_OnlyWindow=1
@@ -107,27 +60,38 @@ nmap <C-_>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 nmap <F6> :cn<cr>
 nmap <F7> :cp<cr>
 nmap <F9> :BufExplorer<cr>
-function GuiTabTooltip()
-	let bufnrlist = tabpagebuflist(v:lnum)
-	let label = ""
-	for bufnr in bufnrlist
-		let fn=bufname(bufnr)
-		if fn==''
-			let fn="[ÎŽÃüÃû]"
-		endif
-		let label .=substitute(fn,'^.*\','','') .  (getbufvar(bufnr,"&modified")? ' +' : '') . "\n"
-	endfor
-	let len=strlen(label)-1
-	if len>124
-		let label=strpart(label,0,124) . '...'
-	else
-		let label=strpart(label,0,len)
-	endif
-	return label
-endfunction
-set guitabtooltip=%{GuiTabTooltip()}
 
-set showmatch
+""function GuiTabTooltip()
+""	let bufnrlist = tabpagebuflist(v:lnum)
+""	let label = ""
+""	for bufnr in bufnrlist
+""		let fn=bufname(bufnr)
+""		if fn==''
+""			let fn="[ÎŽÃüÃû]"
+""		endif
+""		let label .=substitute(fn,'^.*\','','') .  (getbufvar(bufnr,"&modified")? ' +' : '') . "\n"
+""	endfor
+""	let len=strlen(label)-1
+""	if len>124
+""		let label=strpart(label,0,124) . '...'
+""	else
+""		let label=strpart(label,0,len)
+""	endif
+""	return label
+""endfunction
+""set guitabtooltip=%{GuiTabTooltip()}
+
+let g:clang_complete_copen=1
+let g:clang_auto_select=1
+let g:clang_hl_errors=1
+let g:clang_periodic_quickfix=0
+let g:clang_snippets=1
+let g:clang_close_preview=1
+let g:clang_use_library=1
+let g:clang_user_options='-stdlib=libstdc++ -std=c++11 -IIncludePath'
+
+let g:neocomplcache_enable_at_startup = 1
+
 map <UP> gk
 map <DOWN> gj
 
@@ -197,13 +161,13 @@ endf
 
 set fencs=ucs-bom,utf-8,cp936
 
-if &term == "builtin_gui"
-	set encoding=utf-8
-	language message zh_CN.utf-8
-	" fix menu encoding
-	source $VIMRUNTIME/delmenu.vim
-	source $VIMRUNTIME/menu.vim
-endif
+""if &term == "builtin_gui"
+""	set encoding=utf-8
+""	language message zh_CN.utf-8
+""	" fix menu encoding
+""	source $VIMRUNTIME/delmenu.vim
+""	source $VIMRUNTIME/menu.vim
+""endif
 inoremap <expr> <Home> HomeMapping()
 func HomeMapping()
 	let line = getline(".")
@@ -241,7 +205,7 @@ if has("cscope")
       "" echo cscope_file
       "" echo cscope_pre
        if !empty(cscope_file) && filereadable(cscope_file)  
-           exe "cs add" cscope_file cscope_pre  
+           exe "cs add" cscope_file cscope_pre 
        endif        
     "" endif  
 endif  
