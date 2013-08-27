@@ -1,11 +1,3 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =9
-let g:netrw_dirhist_1='/home/marvin/test'
-let g:netrw_dirhist_2='/home/marvin/ngi/.repo'
-let g:netrw_dirhist_3='/home/marvin/ngi/.repo/repo'
-let g:netrw_dirhist_4='/home/marvin/ngi/externals/synergy/bluetooth/bt/18.2.4/applications/obex_map'
-let g:netrw_dirhist_5='/home/marvin/ngi/externals/synergy/bluetooth/.git'
-let g:netrw_dirhist_6='/home/marvin/ngi/system/handler/tests/test_nhcommon'
-let g:netrw_dirhist_7='/home/marvin/ngi/externals/synergy/bluetooth/bt/18.2.4/applications/common/ports/pclin'
-let g:netrw_dirhist_8='/home/marvin/ngi/externals/synergy/bluetooth/bt/18.2.4/applications/bootstrap'
-let g:netrw_dirhist_9='/home/marvin/study/cpp/inheritance'
+let g:netrw_dirhist_cnt =1
+let g:netrw_dirhist_1='/home/marvin'
