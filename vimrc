@@ -1,17 +1,17 @@
 set number
-set guifont=Courier\ New\ 12
+set guifont=Ubuntu\Mono\ 12
 syntax enable
 set syntax=on
 set autoindent
 set smartindent
 set cindent
-""set background=dark
-""colorscheme bandit
+
 if(has("gui_running"))
 colorscheme marvin
 else
 colorscheme desert
 endif
+
 set ts=4
 set expandtab
 set shiftwidth=4
@@ -20,15 +20,14 @@ set tags=tags;
 
 set autochdir
 
-""au GUIEnter * simalt ~x
 set guioptions-=T
-set cursorline
+
 set ic smartcase
 
-""set listchars+=tab:>\ 
 set nobackup
 set backupext=.bak
 set scrolloff=3
+
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! `\"" | endif
 
 set numberwidth=3
@@ -38,8 +37,6 @@ set backspace=indent,eol,start
 set hlsearch
 
 filetype plugin indent on
-
-
 
 let Tlist_Show_One_File=1
 let Tlist_Exit_OnlyWindow=1
@@ -57,29 +54,11 @@ nmap <C-_>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
 nmap <C-_>i :cs find i <C-R>=expand("<cfile>")<CR><CR>
 nmap <C-_>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 
+
 nmap <F6> :cn<cr>
 nmap <F7> :cp<cr>
 nmap <F9> :BufExplorer<cr>
-
-""function GuiTabTooltip()
-""	let bufnrlist = tabpagebuflist(v:lnum)
-""	let label = ""
-""	for bufnr in bufnrlist
-""		let fn=bufname(bufnr)
-""		if fn==''
-""			let fn="[ÎŽÃüÃû]"
-""		endif
-""		let label .=substitute(fn,'^.*\','','') .  (getbufvar(bufnr,"&modified")? ' +' : '') . "\n"
-""	endfor
-""	let len=strlen(label)-1
-""	if len>124
-""		let label=strpart(label,0,124) . '...'
-""	else
-""		let label=strpart(label,0,len)
-""	endif
-""	return label
-""endfunction
-""set guitabtooltip=%{GuiTabTooltip()}
+nmap <F12> :A<cr>
 
 let g:clang_complete_copen=1
 let g:clang_auto_select=1
@@ -96,6 +75,8 @@ map <UP> gk
 map <DOWN> gj
 
 nmap <SPACE> /<C-R>=expand("<cword>")<CR><CR>
+nmap <C-\> :tag <C-R>=expand("<cword>")<CR><CR>
+nmap <C-y> :tag<CR><CR>
 
 inoremap ( ()<ESC>i
 inoremap [ []<ESC>i
@@ -123,6 +104,7 @@ func CSemiColon()
 	endwhile
 	return flag ? "\x1BA;" : ";"
 endf
+
 inoremap <expr> { CCur()
 func CCur()
 	let line = getline(".")
@@ -161,13 +143,6 @@ endf
 
 set fencs=ucs-bom,utf-8,cp936
 
-""if &term == "builtin_gui"
-""	set encoding=utf-8
-""	language message zh_CN.utf-8
-""	" fix menu encoding
-""	source $VIMRUNTIME/delmenu.vim
-""	source $VIMRUNTIME/menu.vim
-""endif
 inoremap <expr> <Home> HomeMapping()
 func HomeMapping()
 	let line = getline(".")
@@ -187,27 +162,17 @@ endf
 inoremap <S-Space> <End>
 set fdm=marker
 
-""cs add ~/ngi/externals/synergy/bluetooth/cscope.out ~/ngi/externals/synergy/bluetooth
 if has("cscope")  
     set csprg=/usr/local/bin/cscope  
     set csto=0  
     set cst  
     set csverb  
     set cspc=3  
-    "add any database in current dir  
-   "" if filereadable("cscope.out")  
-    ""    cs add cscope.out  
-    "else search cscope.out elsewhere  
-   "" else  
-       let cscope_file=findfile("cscope.out", ".;")  
- ""      let cscope_pre=matchstr(cscope_file, ".*/")  a
-       let cscope_pre=getcwd()
-      "" echo cscope_file
-      "" echo cscope_pre
-       if !empty(cscope_file) && filereadable(cscope_file)  
-           exe "cs add" cscope_file cscope_pre 
-       endif        
-    "" endif  
+    let cscope_file=findfile("cscope.out", ".;")  
+    let cscope_pre=getcwd()
+    if !empty(cscope_file) && filereadable(cscope_file)  
+       exe "cs add" cscope_file cscope_pre 
+    endif        
 endif  
 
 """"""""""""""""""""""""""""""
@@ -260,3 +225,12 @@ autocmd BufRead,BufNewFile *.[ch]   exe 'so ' . fname
 autocmd BufRead,BufNewFile *.[ch] endif
 
 nmap <F4> :UpdateTypesFile<cr>
+
+
+" for high light "
+nmap <silent> <leader>hl <Plug>MarkSet
+vmap <silent> <leader>hl <Plug>MarkSet
+nmap <silent> <leader>hh <Plug>MarkClear
+vmap <silent> <leader>hh <Plug>MarkClear
+nmap <silent> <leader>hr <Plug>MarkRegex
+vmap <silent> <leader>hr <Plug>MarkRegex 
