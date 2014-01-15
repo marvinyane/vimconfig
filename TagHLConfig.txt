@@ -1,0 +1,7 @@
+IncludeLocals:True
+ReloadColourScheme:True
+SetWorkingDir:True
+EnableCscope:True
+ExtensionLanguageOverrides:
+    hg:all
+    diff:all
