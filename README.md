@@ -1,8 +1,9 @@
-vimconfig
-=========
-
-the vim configure file and plugins
-
-most of vimrc are copied from the Internet, so it's very mess, lots of the config has lost form my mind....
-
-maybe i should add some notes
+Linux: 
+  copy .vimrc to user directory
+  mkdir .vim
+  copy bundles.vim to .vim
+  copy TagHLConfig.txt to .vim
+  
+  open a vim editor
+  type : :BundleInstall
+  sign in your github according to the tips.
