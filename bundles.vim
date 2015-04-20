@@ -15,7 +15,7 @@ Bundle 'gmarik/vundle'
 Bundle 'vim-scripts/a.vim'
 Bundle 'Kris2k/mark.vim'
 Bundle 'skroll/vim-easycolour'
-Bundle 'xtrnet/TagHighlight'
+Bundle 'vim-scripts/TagHighlight'
 
 "------------------
 " Code Completions
