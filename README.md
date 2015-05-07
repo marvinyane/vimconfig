@@ -3,6 +3,8 @@ Linux:
   mkdir .vim
   copy bundles.vim to .vim
   copy TagHLConfig.txt to .vim
+  mkdir bundle
+  copy vundle to bundle
   
   open a vim editor
   type : :BundleInstall

@@ -1,0 +1,28 @@
+# Saving this file will update the current colour scheme.
+Basis:solarized
+Dark:
+	GlobalVariable:DeepSkyBlue
+	LocalVariable:green
+	GlobalConstant:purple
+	Constant:#ffff66
+	String:indianred1
+	Character:DarkYellow
+	PreProc:indianred2,Style=Bold
+	Include:GreenYellow
+	Define,Macro:indianred2,Style=Bold
+	PreCondit:indianred2,Style=Bold
+	DefinedName:Violet
+	Exception:yellow
+	Operator:#CCCCFF
+	Function:SpringGreen3,Style=Bold
+	Structure:#FF8080
+	Class:SpringGreen3,Style=Bold
+	EnumerationValue:RosyBrown,Style=Bold
+	EnumerationName:DarkKhaki
+	Member:#98FB98
+	Union:DarkKhaki
+	MatchParen:Yellow,Style=Underline
+	Todo:Blue,Yellow
+# No light colour scheme defined
+
+# vim: ff=unix:noet:ft=EasyColour
