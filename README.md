@@ -1,11 +1,11 @@
 #### Install vim environment
 - copy .vimrc to user directory
-- mkdir .vim
+- mkdir .vim under your user directory
 - copy bundles.vim to .vim
 - copy TagHLConfig.txt to .vim
-- copy make-vim_project.sh to /usr/bin (or other...)
+- copy make_vim_project.sh to /usr/bin (or other...)
 - open a vim editor
-- type : :BundleInstall, after done all plugin has installed.
+- :BundleInstall, after done all plugin has installed.
 
 #### create project
 - change dir to your project directory
