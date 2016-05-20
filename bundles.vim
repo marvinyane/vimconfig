@@ -15,7 +15,7 @@ Bundle 'gmarik/vundle'
 Bundle 'vim-scripts/a.vim'
 Bundle 'Kris2k/mark.vim'
 Bundle 'skroll/vim-easycolour'
-Bundle 'vim-scripts/TagHighlight'
+Bundle 'xtrnet/TagHighlight'
 
 "------------------
 " Code Completions
@@ -57,7 +57,7 @@ Bundle 'majutsushi/tagbar'
 "Bundle 'mileszs/ack.vim'
 Bundle 'kien/ctrlp.vim'
 "Bundle 'tpope/vim-fugitive'
-Bundle 'Lokaltog/vim-powerline'
+"Bundle 'Lokaltog/vim-powerline'
 "Bundle 'scrooloose/syntastic'
 "Bundle 'bronson/vim-trailing-whitespace'
 
@@ -122,4 +122,24 @@ Bundle 'Rip-Rip/clang_complete'
 Bundle 'taglist.vim'
 Bundle 'freya'
 "Bundle 'vim-scripts/winmanager'
+"
+"
+Bundle 'vim-scripts/DoxygenToolkit.vim'
+
+"Bundle 'vim-scripts/c.vim'
+"
+Bundle 'bling/vim-airline'
+Bundle 'altercation/vim-colors-solarized'
+
+"Bundle 'exvim/ex-config'
+"Bundle 'exvim/ex-utility'
+"Bundle 'exvim/ex-vimentry'
+"Bundle 'exvim/ex-project'
+
+Bundle 'vim-scripts/Pydiction'
+
+Bundle 'derekwyatt/vim-protodef'
+Bundle 'derekwyatt/vim-fswitch'
+Bundle 'Mizuchi/STL-Syntax'
+
 filetype plugin indent on     " required!

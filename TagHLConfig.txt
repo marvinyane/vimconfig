@@ -1,7 +1,11 @@
-IncludeLocals:True
-ReloadColourScheme:True
 SetWorkingDir:True
+ProjectConfigFileName:.vimpro
+UserLibraries:/usr/local/include/local.taghl
+ReloadColourScheme:True
 EnableCscope:True
+TagFileDirectory:.vimconfig
+CscopeFileDirectory:.vimconfig
+TypesFileDirectory:.vimconfig
 ExtensionLanguageOverrides:
     hg:all
     diff:all

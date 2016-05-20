@@ -57,7 +57,7 @@ set lazyredraw
 "nnoremap m @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 
 " for ctags
-set tags=tags;                                                    " 自动向上寻找tags文件
+"set tags=tags;                                                    " 自动向上寻找tags文件
 
 " for file buffer
 " shift+Tab 上一个Buffer文件 Tab:下一个Buffer文件
@@ -97,7 +97,7 @@ let mapleader = ","     " 设置leader为,
 
 if has("gui_running")
     "set guifont=Ubuntu\Mono\ 13
-    set guifont=Courier\10\Pitch\ 12
+    set guifont=Courier\10\Pitch\ 13
     "set guifont=YaHei\Consolas\Hybrid\ 12
     set guioptions-=T
     set background=dark
@@ -105,7 +105,7 @@ if has("gui_running")
 else
     set background=dark
     set guifont=Courier\10\Pitch\ 12
-    colorscheme desert
+    colorscheme solar
 endif
 
 set nobackup
@@ -148,20 +148,17 @@ nmap <C-_>i :cs find i <C-R>=expand("<cfile>")<CR><CR>
 nmap <C-_>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 
 if has("cscope")  
-    set csprg=/usr/local/bin/cscope  
+    set csprg=/usr/bin/cscope  
     set csto=0  
     set cst  
     set csverb  
     set cspc=3  
-    let cscope_file=findfile("cscope.out", ".;")  
+    let cscope_file=findfile("cscope.out", ".vimconfig;")  
     let cscope_pre=getcwd()
     if !empty(cscope_file) && filereadable(cscope_file)  
         exe "cs add" cscope_file cscope_pre 
-    endif        
-endif  
-
-
-
+    endif
+endif
 
 """"""""""""""""""""""""""""""""""""""""""
 "
@@ -195,7 +192,7 @@ let g:clang_snippets = 1
 let g:clang_snippets_engine = 'clang_complete'
 let g:clang_close_preview = 1
 let g:clang_use_library = 1
-"let g:clang_user_options = '-stdlib=libstdc++ -std=c++11 -IIncludePath'
+let g:clang_user_options = '-stdlib=libstdc++ -std=c++11 -IIncludePath'
 let g:clang_user_options = '-IIncludePath'
 
 let g:clang_jumpto_declaration_key = '[C-[]'
@@ -250,7 +247,7 @@ let g:ctrlp_map = ',,'      " 将CtrlP的快捷键设置为,,
 let g:ctrlp_by_filename = 1 " 搜索时只使用文件名，不带路径
 set wildignore+=*/tmp/*,*.so,*.o,*.a,*.obj,*.swp,*.zip,*.pyc,*.pyo,*.class,.DS_Store  " MacOSX/Linux
 let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'     " 忽略这些版本管理目录
-let g:ctrlp_root_markers = ['lookupfiles.sh']                     " 优先寻找.git作为root目录
+let g:ctrlp_root_markers = ['.vimpro']                     " 优先寻找.git作为root目录
 nnoremap <Leader>. :CtrlPTag<CR>
 
 
@@ -591,7 +588,7 @@ nmap <leader>l :DoxLic<CR>
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-function InsertHeadDef(firstLine, lastLine)
+function InsertHeadDef(firstLine, lastLine, cpp)
     if a:firstLine <1 || a:lastLine> line('$')
         echoerr 'InsertHeadDef : Range overflow !(FirstLine:'.a:firstLine.';LastLine:'.a:lastLine.';ValidRange:1~'.line('$').')'
         return ''
@@ -605,32 +602,41 @@ function InsertHeadDef(firstLine, lastLine)
     normal ==o
     call setline('.', '#define __'.definename."__")
     normal == o
-    normal == o
 
-    call setline('.', '#ifdef __cplusplus')
-    normal == o
-    call setline('.', 'extern "C" {')
-    normal == o
-    call setline('.', '#endif')
-    normal == o
-    normal == o
+    if a:cpp == 0
+        call setline('.', '#ifdef __cplusplus')
+        normal == o
+        call setline('.', 'extern "C" {')
+        normal == o
+        call setline('.', '#endif')
+        normal == o
+    endif
 
     exe 'normal =='.(a:lastLine-a:firstLine+1).'jo'
-    normal == o
-    call setline('.', '#ifdef __cplusplus')
-    normal == o
-    call setline('.', '}')
-    normal == o
-    call setline('.', '#endif')
-    normal == o
+    
+    if a:cpp == 0
+        normal == o
+        call setline('.', '#ifdef __cplusplus')
+        normal == o
+        call setline('.', '}')
+        normal == o
+        call setline('.', '#endif')
+        normal == o
+    endif
+
     normal == o
     call setline('.', '#endif')
 
-    let goLn = a:firstLine+5
-    exe 'normal =='.goLn.'G'
+    if a:cpp == 0
+        let goLn = a:firstLine+5
+        exe 'normal =='.goLn.'G'
+    else
+        let goLn = a:firstLine+3
+        exe 'normal =='.goLn.'G'
+    endif
 
 endfunction
-function InsertHeadDefN()
+function InsertHeadDefN(cpp)
     let firstLine = 1
     let lastLine = line('$')
     let n=1
@@ -650,7 +656,7 @@ function InsertHeadDefN()
         endif
         let n = n + 1
     endwhile
-    call InsertHeadDef(firstLine, lastLine)
+    call InsertHeadDef(firstLine, lastLine, a:cpp)
 endfunction
 
 function InsterHeaderForPython()
@@ -659,7 +665,8 @@ function InsterHeaderForPython()
 endfunction
 
 
-autocmd FileType c,cpp nmap <leader>ha :call InsertHeadDefN()<CR>
+autocmd FileType c,cpp nmap <leader>ha :call InsertHeadDefN(0)<CR>
+autocmd FileType c,cpp nmap <leader>hb :call InsertHeadDefN(1)<CR>
 autocmd FileType python nmap <leader>ha :call InsterHeaderForPython()<CR>
 
 
@@ -780,3 +787,31 @@ nmap <leader>p :bp<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 autocmd FileType python set omnifunc=pythoncomplete#Complete
 let g:pydiction_location='~/.vim/bundle/Pydiction/complete-dict'
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
+" c++ implemation auto generate
+"
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 设置 pullproto.pl 脚本路径
+let g:protodefprotogetter='~/.vim/bundle/vim-protodef/pullproto.pl'
+" " 成员函数的实现顺序与声明顺序一致
+let g:disable_protodef_sorting=1
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
+" 
+"
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 随 vim 自启动
+let g:indent_guides_enable_on_vim_startup=1
+" " 从第二层开始可视化显示缩进
+let g:indent_guides_start_level=2
+" " 色块宽度
+let g:indent_guides_guide_size=1
+" " 快捷键 i 开/关缩进可视化
+:nmap <silent> <Leader>i <Plug>IndentGuidesToggle
