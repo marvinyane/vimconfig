@@ -14,9 +14,5 @@
 
 
 #### command
-<F4> create or update project file
-ctags
-cscope
-etc....
 
 
