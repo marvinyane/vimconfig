@@ -181,6 +181,7 @@ nmap <F12> :A<cr>
 " CLANG COMPLETE
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:clang_library_path='/usr/lib/llvm-3.5/lib/'
 let g:clang_complete_copen = 1
 let g:clang_complete_auto = 1
 let g:clang_complete_macros = 1
@@ -475,13 +476,7 @@ if ! exists('g:TagHighlightSettings')
     let g:TagHighlightSettings = {}
 endif
 
-"let g:TagHighlightSettings['TagFileName'] = 'types.vim'
-"let g:TagHighlightSettings['CtagsExecutable'] = 'ctags'
-"let g:TagHighlightSettings['LanguageDetectionMethods'] = ['Extension', 'FileType']
-"let g:TagHighlightSettings['FileTypeLanguageOverrides'] = {'tagbar': 'c'}
-"let g:TagHighlightSettings[''] = True
-
-nmap <F4> :UpdateTypesFile<cr>
+nmap <F4> :UpdateTypesFileOnly<cr>
 
 
 
@@ -808,10 +803,23 @@ let g:disable_protodef_sorting=1
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 随 vim 自启动
-let g:indent_guides_enable_on_vim_startup=1
+"let g:indent_guides_enable_on_vim_startup=1
 " " 从第二层开始可视化显示缩进
-let g:indent_guides_start_level=2
+"let g:indent_guides_start_level=2
 " " 色块宽度
-let g:indent_guides_guide_size=1
+"let g:indent_guides_guide_size=1
 " " 快捷键 i 开/关缩进可视化
-:nmap <silent> <Leader>i <Plug>IndentGuidesToggle
+":nmap <silent> <Leader>i <Plug>IndentGuidesToggle
+"
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
+" c lighter libclang 
+"
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"let g:clighter_autostart = 1
+"let g:ClighterCompileArgs = '["-x", "c++", "-std=c++", "-DLinux"]'
+"let g:clighter_libclang_file = '/usr/lib/llvm-3.5/lib/libclang.so'
+"nmap <silent> <Leader>t :call clighter#Rename()<CR>

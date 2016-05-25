@@ -142,4 +142,7 @@ Bundle 'derekwyatt/vim-protodef'
 Bundle 'derekwyatt/vim-fswitch'
 Bundle 'Mizuchi/STL-Syntax'
 
+"Bundle 'jeaye/color_coded'
+"Bundle 'bbchung/clighter'
+
 filetype plugin indent on     " required!
